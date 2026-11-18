@@ -40,12 +40,12 @@ This project uses the **RSNA Pneumonia Detection Challenge** dataset:
 - **Modification:** First convolution changed to accept single-channel (grayscale) X-rays
 - **Output:** 1 logit → sigmoid output for pneumonia probability
 - **Loss:** Binary Cross-Entropy with logits (with `pos_weight` for class imbalance)
-- **Optimization:** Adam optimizer
+- **Optimization:** AdamW optimizer
 
 ---
 
 ## 📊 Quantitative Results
-Validation AUROC: 0.913
+Reported validation AUROC: **0.913**. This is a validation-set result, not an independent test-set or clinical performance estimate.
 
 ![AUROC and Metrics](results/metrics.png)
 
@@ -96,9 +96,11 @@ This reflects a known limitation of chest X-ray diagnosis and highlights the imp
 ## 🧪 How to Reproduce
 
 1. Download and unpack the RSNA dataset from Kaggle.
-2. Preprocess images using `preprocess.ipynb`.
-3. Train the model with `train.ipynb`.
-4. Analyze predictions and Grad-CAM with `interpretability.ipynb`.
+2. Preprocess images using [`notebooks/data_preprocessing.ipynb`](notebooks/data_preprocessing.ipynb).
+3. Train and evaluate the model with [`notebooks/model_training.ipynb`](notebooks/model_training.ipynb).
+4. Analyze Grad-CAM with [`notebooks/visual_interpretability.ipynb`](notebooks/visual_interpretability.ipynb).
+
+Adjust dataset and checkpoint paths to your local files before running the notebooks. The training notebook expects preprocessed arrays under `processed/train` and `processed/val`, relative to its working directory. Dependency versions are not currently pinned in this repository.
 
 ## 📬 Notes
 
