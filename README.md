@@ -19,13 +19,15 @@ This project uses the **RSNA Pneumonia Detection Challenge** dataset:
   - `test_images/` — test DICOM files
   - `train_labels.csv` — bounding box and label annotations
   - Metadata indicating whether a study has pneumonia
-- This project uses the provided labels to create a **binary classification task** (pneumonia vs normal).
+- This project uses the provided labels for **binary classification** of the RSNA dataset’s pneumonia-positive (`Target=1`) versus negative (`Target=0`) labels.
+
+The published preprocessing uses `Target` directly and does not restrict negative cases to the dataset’s Normal category. A negative label should not be interpreted as a normal chest X-ray or a clinical exclusion of pneumonia.
 
 ---
 
 ## 💡 Project Overview
 
-- **Task:** Binary classification (Pneumonia / Normal)
+- **Task:** Binary classification of RSNA pneumonia-positive (`Target=1`) versus negative (`Target=0`) labels
 - **Input:** Preprocessed chest X-ray images resized to 224×224
 - **Model:** Modified ResNet-18 with a single input channel
 - **Frameworks:** PyTorch, PyTorch Lightning
@@ -38,7 +40,7 @@ This project uses the **RSNA Pneumonia Detection Challenge** dataset:
 
 - **Backbone:** ResNet-18 (ImageNet pretrained)
 - **Modification:** First convolution changed to accept single-channel (grayscale) X-rays
-- **Output:** 1 logit → sigmoid output for pneumonia probability
+- **Output:** 1 logit → sigmoid score for the positive dataset label
 - **Loss:** Binary Cross-Entropy with logits (with `pos_weight` for class imbalance)
 - **Optimization:** AdamW optimizer
 
